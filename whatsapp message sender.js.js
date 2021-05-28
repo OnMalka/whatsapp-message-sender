@@ -32,19 +32,14 @@ async function sendWhatsappMassage(contactName, message) {
     }
     
     await page.waitForSelector("#main > footer > div.vR1LG._3wXwX.copyable-area > div._2A8P4 > div > div.OTBsx");
-    console.log('selector found');
 
     const editor = await page.waitForSelector("#main > footer > div.vR1LG._3wXwX.copyable-area > div._2A8P4 > div > div.OTBsx");
     await editor.focus();
-    console.log('editor focused');
 
     await page.evaluate((message) => {
-        console.log("message: "+message);
         document.execCommand("insertText", false, message);
       }, message);
-      console.log('evaluated');
     await page.keyboard.press('Enter');
-    console.log('Enter pressed');
     await page.waitForTimeout(500);
     await browser.close(); 
   } catch (e) {
